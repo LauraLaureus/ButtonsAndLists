@@ -270,6 +270,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="A Lista2"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toList2buttonActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="list2Panel">
       <Properties>
@@ -335,16 +338,25 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpia lista"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cleanList2ButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="ClearSelectionList2Button">
           <Properties>
             <Property name="text" type="java.lang.String" value="Limpia seleccion"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ClearSelectionList2ButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="sortList2Button">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ordena lista"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sortList2ButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

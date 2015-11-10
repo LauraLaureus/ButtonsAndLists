@@ -1,4 +1,5 @@
 
+import java.util.Collections;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 
@@ -169,16 +170,36 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         toList2button.setText("A Lista2");
+        toList2button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toList2buttonActionPerformed(evt);
+            }
+        });
 
         list2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista2"));
 
         jScrollPane2.setViewportView(list2);
 
         cleanList2Button.setText("Limpia lista");
+        cleanList2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cleanList2ButtonActionPerformed(evt);
+            }
+        });
 
         ClearSelectionList2Button.setText("Limpia seleccion");
+        ClearSelectionList2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ClearSelectionList2ButtonActionPerformed(evt);
+            }
+        });
 
         sortList2Button.setText("Ordena lista");
+        sortList2Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortList2ButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout list2PanelLayout = new javax.swing.GroupLayout(list2Panel);
         list2Panel.setLayout(list2PanelLayout);
@@ -292,6 +313,32 @@ public class MainFrame extends javax.swing.JFrame {
         list1.setListData(new String[0]);
     }//GEN-LAST:event_resetList1SelectionbuttonActionPerformed
 
+    private void toList2buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toList2buttonActionPerformed
+        List selected = list1.getSelectedValuesList();
+        list2.setListData(selected.toArray());
+    }//GEN-LAST:event_toList2buttonActionPerformed
+
+    private void cleanList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanList2ButtonActionPerformed
+        list2.setListData(new String[0]);
+    }//GEN-LAST:event_cleanList2ButtonActionPerformed
+
+    private void ClearSelectionList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearSelectionList2ButtonActionPerformed
+        List selected = list2.getSelectedValuesList();
+        if(selected.isEmpty()) return;
+        list2.setSelectionInterval(0, list2.getModel().getSize()-1);
+        List totalList = list2.getSelectedValuesList();
+        totalList.removeAll(selected);
+        list2.setListData(totalList.toArray());
+    }//GEN-LAST:event_ClearSelectionList2ButtonActionPerformed
+
+    private void sortList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortList2ButtonActionPerformed
+        list2.setSelectionInterval(0, list2.getModel().getSize()-1);
+        List totalList = list2.getSelectedValuesList();
+        Collections.sort(totalList);
+        list2.setListData(totalList.toArray());
+    }//GEN-LAST:event_sortList2ButtonActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
