@@ -1,3 +1,10 @@
+
+import java.util.List;
+import javax.swing.ListSelectionModel;
+
+
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -33,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
         toList1button = new javax.swing.JButton();
         list1Panel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        list1 = new javax.swing.JList();
         resetList1Selectionbutton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         simpleSelectionGroup = new javax.swing.JToggleButton();
@@ -79,20 +86,40 @@ public class MainFrame extends javax.swing.JFrame {
 
         list1Panel.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista1"));
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(list1);
 
         resetList1Selectionbutton.setText("Limpia seleccion");
+        resetList1Selectionbutton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetList1SelectionbuttonActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Modo de selección"));
 
         buttonGroup.add(simpleSelectionGroup);
         simpleSelectionGroup.setText("Simple");
+        simpleSelectionGroup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpleSelectionGroupActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(intervalSelectionButton);
         intervalSelectionButton.setText("Intervalo");
+        intervalSelectionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                intervalSelectionButtonActionPerformed(evt);
+            }
+        });
 
         buttonGroup.add(severalSelectionButtons);
         severalSelectionButtons.setText("Multiples intervalos");
+        severalSelectionButtons.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                severalSelectionButtonsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -232,8 +259,38 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void toList1buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toList1buttonActionPerformed
+        String data = dataTextField.getText();
+        
+        dataTextField.setText(null);
+        int listLenght = list1.getModel().getSize();
+        if(listLenght == 0){
+            String[] values = new String[1];
+            values[0] = data;
+            list1.setListData(values);
+        }else{
+            list1.setSelectionInterval(0, listLenght-1);
+            List selected = list1.getSelectedValuesList();
+            selected.add(data);
+            list1.setListData(selected.toArray());
+        }
         
     }//GEN-LAST:event_toList1buttonActionPerformed
+
+    private void simpleSelectionGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpleSelectionGroupActionPerformed
+        list1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }//GEN-LAST:event_simpleSelectionGroupActionPerformed
+
+    private void intervalSelectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_intervalSelectionButtonActionPerformed
+        list1.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_intervalSelectionButtonActionPerformed
+
+    private void severalSelectionButtonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_severalSelectionButtonsActionPerformed
+        list1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+    }//GEN-LAST:event_severalSelectionButtonsActionPerformed
+
+    private void resetList1SelectionbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetList1SelectionbuttonActionPerformed
+        list1.setListData(new String[0]);
+    }//GEN-LAST:event_resetList1SelectionbuttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,11 +334,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton cleanList2Button;
     private javax.swing.JTextField dataTextField;
     private javax.swing.JToggleButton intervalSelectionButton;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JList list1;
     private javax.swing.JPanel list1Panel;
     private javax.swing.JList list2;
     private javax.swing.JPanel list2Panel;
