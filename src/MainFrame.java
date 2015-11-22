@@ -3,15 +3,11 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author lala
@@ -23,6 +19,7 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        simpleSelectionGroup.setSelected(true);
     }
 
     /**
@@ -281,20 +278,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void toList1buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toList1buttonActionPerformed
         String data = dataTextField.getText();
-        
+
         dataTextField.setText(null);
         int listLenght = list1.getModel().getSize();
-        if(listLenght == 0){
+        if (listLenght == 0) {
             String[] values = new String[1];
             values[0] = data;
             list1.setListData(values);
-        }else{
-            list1.setSelectionInterval(0, listLenght-1);
+        } else {
+            list1.setSelectionInterval(0, listLenght - 1);
             List selected = list1.getSelectedValuesList();
             selected.add(data);
             list1.setListData(selected.toArray());
         }
-        
+
     }//GEN-LAST:event_toList1buttonActionPerformed
 
     private void simpleSelectionGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpleSelectionGroupActionPerformed
@@ -310,12 +307,28 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_severalSelectionButtonsActionPerformed
 
     private void resetList1SelectionbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetList1SelectionbuttonActionPerformed
-        list1.setListData(new String[0]);
+        List l = list1.getSelectedValuesList();
+        list1.setSelectionInterval(0, list1.getModel().getSize() - 1);
+        List all = list1.getSelectedValuesList();
+        all.removeAll(l);
+        list1.setListData(all.toArray());
     }//GEN-LAST:event_resetList1SelectionbuttonActionPerformed
 
     private void toList2buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toList2buttonActionPerformed
         List selected = list1.getSelectedValuesList();
-        list2.setListData(selected.toArray());
+        int listLenght = list2.getModel().getSize();
+        if (listLenght == 0) {
+            String[] values = new String[1];
+            list2.setListData(selected.toArray());
+        } else {
+            list2.setSelectionInterval(0, listLenght - 1);
+            List l2 = list2.getSelectedValuesList();
+            for (Object sel : selected) {
+                l2.add(sel);
+            }
+            list2.setListData(l2.toArray());
+        }
+
     }//GEN-LAST:event_toList2buttonActionPerformed
 
     private void cleanList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cleanList2ButtonActionPerformed
@@ -324,21 +337,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void ClearSelectionList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClearSelectionList2ButtonActionPerformed
         List selected = list2.getSelectedValuesList();
-        if(selected.isEmpty()) return;
-        list2.setSelectionInterval(0, list2.getModel().getSize()-1);
+        if (selected.isEmpty()) {
+            return;
+        }
+        list2.setSelectionInterval(0, list2.getModel().getSize() - 1);
         List totalList = list2.getSelectedValuesList();
         totalList.removeAll(selected);
         list2.setListData(totalList.toArray());
     }//GEN-LAST:event_ClearSelectionList2ButtonActionPerformed
 
     private void sortList2ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortList2ButtonActionPerformed
-        list2.setSelectionInterval(0, list2.getModel().getSize()-1);
+        list2.setSelectionInterval(0, list2.getModel().getSize() - 1);
         List totalList = list2.getSelectedValuesList();
         Collections.sort(totalList);
         list2.setListData(totalList.toArray());
     }//GEN-LAST:event_sortList2ButtonActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */
